@@ -15,17 +15,20 @@ class HumanSpaceship extends Spaceship {
     
 }
 attack(alienSpaceship) {
-    if (Math.random() < this.accuracy)
-    console.log('Successful Attack!')
-    alienSpaceship.hull = alienSpaceship.hull - this.firepower
-    console.log(`${alienShip[0].name} has ${alienShip[0].hull} health remaining.`)
-}else{
-        console.log('Try again! They missed.')
+    if(this.hull < 0 && humanSpaceship.hull > 0){ //checking if the human health is more than 0
+        if (Math.random() < this.accuracy)
+        console.log('Successful Attack!')
+       alienSpaceship.hull = alienSpaceship.hull - this.firepower
+       console.log(`${alienShip[0].name} has ${alienShip[0].hull} health remaining.`)
+            
+        }else{
+            console.log('Try again! They missed.')
+        }
+        
+    }
+}  
     
-}
-    
-    
-console.log(alienSpaceship)
+
   
 
 
@@ -62,7 +65,44 @@ for(let i = 0; i < 6; i++){
     alienShip.push(alienSpaceship)
 }
 
+
+
+for (let i = 0; i < alienShip.length; i++) { 
+    const battleRound = (alienShip, HumanSpaceship) => {
+
+
 humanSpaceship1.attack(alienShip[0])
-humanSpaceship2.attack(alienSpaceship[1])
-
-
+humanSpaceship1.attack(alienShip[1])
+humanSpaceship1.attack(alienShip[2])
+humanSpaceship1.attack(alienShip[3])
+humanSpaceship1.attack(alienShip[4])
+humanSpaceship1.attack(alienShip[5])
+humanSpaceship1.attack(alienShip[6])
+        
+      let winnerOfRound = true;
+      while (winnerOfRound) {
+        if (humanSpaceship1.hull > 0 && alienShip[0].hull >= 1) {
+            console.log("Attack the Alien Ship!");
+           humanSpaceship1.attack(alienShip[0]);
+          }
+          if (alienShip[0].hull > 0 && humanSpaceship1.hull > 0) {
+            console.log("Yikes!! Aliens are attacking!");
+            alienShip[0].attack(humanSpaceship1);
+          }
+          if (humanSpaceship1.hull > 0 && alienShip[0].hull <= 0) {
+            console.log("We are kicking some Alien butt!");
+            winnerOfRound = false;
+            console.log('YOU SAVED THE PLANET!')
+            
+          } 
+          
+          else {
+            console.log("You Lose. Game Over.");
+            winnerOfRound =  false;
+          }
+    }
+    
+    
+    };
+    battleRound(alienShip, humanSpaceship1);
+     } 
